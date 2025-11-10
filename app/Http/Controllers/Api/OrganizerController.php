@@ -100,7 +100,7 @@ class OrganizerController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'organisateur activée avec succès.'
+            'message' => 'organisateur desactivée avec succès.'
         ], 200);
     }
 }
