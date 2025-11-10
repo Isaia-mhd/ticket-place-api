@@ -32,7 +32,7 @@ class OrganizerController extends Controller
                 'message' => 'Organizer not found.'
             ], 404);
         }
-        
+
         $organiser->delete();
 
         return response()->json([
