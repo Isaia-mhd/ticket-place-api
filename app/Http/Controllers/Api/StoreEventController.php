@@ -6,11 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class StoreEventController extends Controller
 {
      public function store(EventRequest $request)
     {
+        if(Gate::denies('is_super_admin'))
+        {
+            return response()->json([
+                'message' => 'Action refusé.'
+            ], 403);
+        }
+        
         $data = $request->validated();
 
         // add the owner automated.
