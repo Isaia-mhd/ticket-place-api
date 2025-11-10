@@ -18,7 +18,7 @@ class GetEventController extends Controller
                 $query->where('title', 'like', "%{$search}%")
                     ->orWhere('description', 'like', "%{$search}%")
                     ->orWhere('venue', 'like', "%{$search}%")
-                    ->orWhereDate('event_date', Carbon::parse($search)->format('Y-m-d'))
+                    ->orWhereDate('event_date', $search)
                     ->orWhere('type', 'like', "%{$search}%");
             })
             ->latest()

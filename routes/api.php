@@ -17,5 +17,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/events/new', [StoreEventController::class, 'store']);
     Route::post('/organizer/new', [RegisterOrganizerController::class, 'store']);
-    Route::post('/organizer/delete', [OrganizerController::class, 'destroy']);
+    Route::delete('/organizer/delete', [OrganizerController::class, 'destroy']);
+    Route::put('/organizer/active', [OrganizerController::class, 'active']);
+    Route::put('/organizer/deactive', [OrganizerController::class, 'deactive']);
 });
