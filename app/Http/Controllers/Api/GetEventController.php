@@ -15,6 +15,7 @@ class GetEventController extends Controller
         $events = Event::query()
             ->when($search, function ($query, $search) {
                 $query->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%")
                     ->orWhere('venue', 'like', "%{$search}%")
                     ->orWhere('type', 'like', "%{$search}%");
             })
