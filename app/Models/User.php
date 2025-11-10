@@ -42,4 +42,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Les événements créés par l’utilisateur (organisateur)
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
+    // Les tickets achetés par l’utilisateur
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
 }
