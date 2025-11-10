@@ -7,11 +7,19 @@ use App\Http\Requests\RegisterOrganizerRequest;
 use App\Models\User;
 use Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RegisterOrganizerController extends Controller
 {
     public function store(RegisterOrganizerRequest $request)
     {
+        if(Gate::denies('is_super_admin'))
+        {
+            return response()->json([
+                'message' => 'Action refusé.'
+            ], 403);
+        }
+        
         $data = $request->validated();
         $organizer = User::create([
             ...$data,
