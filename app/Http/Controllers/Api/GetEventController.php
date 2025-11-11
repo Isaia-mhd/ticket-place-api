@@ -28,4 +28,19 @@ class GetEventController extends Controller
             'events' => $events
         ], 200);
     }
+
+    public function getOne($event)
+    {
+        $event = Event::find($event);
+        if(!$event)
+        {
+            return response()->json([
+                'message' => 'Evènement non trouvée.'
+            ], 404);
+        }
+
+        return response()->json([
+            'event' => $event
+        ], 200);
+    }
 }

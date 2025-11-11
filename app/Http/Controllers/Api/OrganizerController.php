@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Gate;
 
 class OrganizerController extends Controller
 {
+    public function index()
+    {
+        return response()->json([
+            'organizers' => User::where('role', 'organizer')->where('isActive', 1)->get()
+        ], 200);
+    }
     public function destroy(Request $request)
     {
         if(Gate::denies('is_super_admin'))
