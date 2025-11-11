@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function(){
     Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'registerClient']);
     Route::get('/events', [EventController::class, 'index']);
     Route::get('/events/{event}', [EventController::class, 'getOne']);
 });
