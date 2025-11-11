@@ -22,5 +22,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Gate::define('is_super_admin', fn($user) => $user->role === 'super_admin');
         Gate::define('is_active', fn($user) => $user->isActive === 1);
+        Gate::define('owner', fn($user, $ownerId) => $user->id === $ownerId);
     }
 }

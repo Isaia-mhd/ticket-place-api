@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
-class GetEventController extends Controller
+class EventController extends Controller
 {
     public function index(Request $request)
     {
@@ -41,6 +42,28 @@ class GetEventController extends Controller
 
         return response()->json([
             'event' => $event
+        ], 200);
+    }
+
+    public function destroy($event)
+    {
+        $event = Event::find($event);
+        if(!$event)
+        {
+            return response()->json([
+                'message' => 'Evènement non trouvée.'
+            ], 404);
+        }
+        if(Gate::denies('owner', $event->user_id))
+        {
+            return response()->json([
+                'message' => 'Action refusée.'
+            ], 403);
+        }
+
+        $event->delete();
+        return response()->json([
+            'message' => 'Evènement supprimée avec succès.'
         ], 200);
     }
 }
